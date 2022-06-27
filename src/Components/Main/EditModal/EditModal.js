@@ -2,15 +2,10 @@ import React, { useEffect } from 'react'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editEmployee } from '../../../store/EmployeeSlice';
-import './EditModal.css'
 
 function EditModal({id}) {
   const dispatch = useDispatch();
   const employee = useSelector((state) => state.employee);
-  let [isValidName, setValidName] = useState(false)
-  let [isValidEmail, setValidEmail] = useState(false)
-  let [isValidNumber, setValidNumber] = useState(false)
-
   let [emptyData, setEmptyData] = useState([]);
 
   useEffect(() => {
@@ -26,21 +21,6 @@ function EditModal({id}) {
       }
     });
   }, [id]);
-
-  const nameHandler = (e) =>{
-    e == '' ? setValidName(true) : setValidName(false)
-    setEmptyData({...emptyData, id: employee.length+1, name: e})
-  }
-
-  const emailHandler = (e) =>{
-    !e.includes('@') ? setValidEmail(true) : setValidEmail(false)
-    setEmptyData({...emptyData, email: e})
-  }
-
-  const numberHandler = (e) =>{
-    e.length < 10 ? setValidNumber(true) : setValidNumber(false)
-    setEmptyData({...emptyData, number: e})
-  }
 
   const editHandler = (e) => {
     e.preventDefault()
@@ -76,45 +56,36 @@ function EditModal({id}) {
               <div className="left-modal">
                 <div className="inputs-wrapper">
                   <input
-                    style={{borderColor: isValidName ? 'red' : '#333996'}}
-                    className="modal__input mt-1 mb-3"
+                    className="modal__input mt-1"
                     type="text"
                     name="Fullname"
                     placeholder="Full Name"
                     id="NameInput"
                     value={emptyData.name}
-                    onChange={(e) => nameHandler(e.target.value)}
+                    onChange={(e) => setEmptyData({...emptyData, name: e.target.value})}
                     required
                   />
-                    <p style={{display: isValidName ? 'block' : 'none'}}  className="m-0 warning-text p-0 mb-2">
-                      Name is required
-                     </p>
+                  <p className="m-0 name-warning p-0 mb-4" />
                   <input
-                    style={{borderColor: isValidEmail ? 'red' : '#333996'}}
-                    className="modal__input mb-3"
+                    className="modal__input"
                     type="text"
                     name="Email"
                     placeholder="Email"
                     id="EmailInput"
                     required
                     value={emptyData.email}
-                    onChange={(e) => emailHandler(e.target.value)}
+                    onChange={(e) => setEmptyData({...emptyData, email: e.target.value})}
                   />
-                   <p style={{display: isValidEmail ? 'block' : 'none'}} className="m-0 warning-text p-0 mb-2">
-                      Use @
-                    </p>
+                  <p className="m-0 name-warning email-warning p-0 mb-4" />
                   <input
-                    style={{borderColor: isValidNumber ? 'red' : '#333996'}}
                     className="modal__input"
                     name="Mobile"
                     placeholder="Mobile"
                     id="MobileInput"
                     value={emptyData.number}
-                    onChange={(e) => numberHandler(e.target.value)}
-                    required/>
-                    <p style={{display: isValidNumber ? 'block' : 'none'}} className="m-0 error-text p-0 mb-2">
-                      More than 10 number
-                    </p>
+                    onChange={(e) => setEmptyData({...emptyData, number: e.target.value})}
+                    required
+                  />
                 </div>
               </div>
               <div className="ps-5">
