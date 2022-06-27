@@ -1,0 +1,66 @@
+.table{
+  width: 102%;
+  position: relative;
+  left: -15px;
+}
+
+.table__head{
+  font-size: 14px;
+  color: #333996;
+  padding: 10px 20px;
+  background-color: #e2e3f3 !important;
+}
+.table__button{
+  color: #333996;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.4s ease;
+}
+
+.table__btns{
+  font-weight: 600;
+  color: #333996;
+}
+
+
+tr th{
+  padding: 15px !important;
+}
+tr td{
+  font-weight: 300;
+  padding: 15px !important;
+}
+
+.edit-btn{
+  color: #333996;
+  background-color: #e2e3f3;
+  font-size: 22px;
+  padding: 0 6px;
+  border-radius: 4px;
+  transition: all 0.4s ease;
+}
+
+.remove-btn{
+  background-color: #fee0e3;
+  color: #f83245;
+  padding: 0 6px;
+  transition: all 0.4s ease;
+  font-size: 22px;
+  border-radius: 4px;
+}
+
+.remove-btn:hover{
+  background-color: #f4f5fd;
+}
+
+.edit-btn:hover{
+  background-color: #f4f5fd;
+}
+
+td{
+  cursor: pointer;
+}
+.edit-wrapper{
+  padding: 0 0 !important;
+}
+

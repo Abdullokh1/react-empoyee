@@ -1,0 +1,41 @@
+.modal-content{
+  width: 60vw;
+  height: auto;
+  padding: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 15%);
+}
+
+.modal__input{
+  border: 1px solid rgba(102, 102, 102, 0.599);
+  border-radius: 4px;
+  padding: 13px 16px;
+  width: 350px;
+  background-color: transparent;
+}
+
+.modal__input:focus{
+  outline: none;
+}
+.modal__input:hover{
+  border-color: #444;
+}
+
+.inputs-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-check-label{
+  cursor: pointer;
+}
+
+.submit-btn{
+  background-color: #333996;
+  color: #fff;
+}
+
+.reset-btn{
+  background-color: #e0e0e0;
+}
