@@ -96,7 +96,7 @@ function Modal() {
                       id="EmailInput"
                       required
                       onChange={(e) => emailHandler(e.target.value)}/>
-                      <p style={{display: isValidEmail ? 'block' : 'none'}} className="m-0 name-warning error-text p-0 mb-2">
+                      <p style={{display: isValidEmail ? 'block' : 'none'}} className="m-0 error-text p-0 mb-2">
                         Use @
                       </p>
                     <input
@@ -108,7 +108,7 @@ function Modal() {
                       id="MobileInput"
                       required
                       onChange={(e) => numberHandler(e.target.value) }/>
-                     <p style={{display: isValidNumber ? 'block' : 'none'}} className="m-0 name-warning error-text p-0 mb-2">
+                      <p style={{display: isValidNumber ? 'block' : 'none'}} className="m-0 error-text p-0 mb-2">
                         More than 10 number
                       </p>
                   </div>
