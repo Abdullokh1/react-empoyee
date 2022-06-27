@@ -9,9 +9,14 @@ function Modal() {
   const dispatch = useDispatch();
 
   const employee = useSelector((state) => state.employee);
+  let [isValidName, setValidName] = useState(false)
+  let [isValidEmail, setValidEmail] = useState(false)
+  let [isValidNumber, setValidNumber] = useState(false)
+
+
 
   let [userInfo, setUserInfo] = useState({
-    id: employee.length+1,
+    id: '',
     name: "",
     email: "",
     number: "",
@@ -24,6 +29,21 @@ function Modal() {
     )
   }
 
+  const nameHandler = (e) =>{
+    e == '' ? setValidName(true) : setValidName(false)
+    setUserInfo({...userInfo, id: employee.length+1, name: e})
+  }
+
+  const emailHandler = (e) =>{
+    !e.includes('@') ? setValidEmail(true) : setValidEmail(false)
+    setUserInfo({...userInfo, email: e})
+  }
+
+  const numberHandler = (e) =>{
+    e.length < 10 ? setValidNumber(true) : setValidNumber(false)
+    setUserInfo({...userInfo, number: e})
+  }
+ 
   const onSubmitHandle = (e) =>{
    e.preventDefault()
    e.target.reset()
@@ -56,35 +76,41 @@ function Modal() {
                 <div className="left-modal">
                   <div className="inputs-wrapper">
                     <input
-                      className="modal__input mt-1"
+                      style={{borderColor: isValidName ? 'red' : '#333996'}}
+                      className="modal__input mt-1 mb-3"
                       type="text"
                       name="Fullname"
                       placeholder="Full Name"
                       id="NameInput"
                       required
-                      onChange={(e) => setUserInfo({...userInfo, name: e.target.value})}
-                    />
-                    <p className="m-0 name-warning p-0 mb-4" />
+                      onChange={(e) => nameHandler(e.target.value)}/>
+                     <p style={{display: isValidName ? 'block' : 'none'}}  className="m-0 error-text p-0 mb-2">
+                      Name is required
+                     </p>
                     <input
-                      className="modal__input"
+                      style={{borderColor: isValidEmail ? 'red' : '#333996'}}
+                      className="modal__input mb-3"
                       type="text"
                       name="Email"
                       placeholder="Email"
                       id="EmailInput"
                       required
-                      onChange={(e) => setUserInfo({...userInfo, email: e.target.value})}
-
-                    />
-                    <p className="m-0 name-warning email-warning p-0 mb-4" />
+                      onChange={(e) => emailHandler(e.target.value)}/>
+                      <p style={{display: isValidEmail ? 'block' : 'none'}} className="m-0 name-warning error-text p-0 mb-2">
+                        Use @
+                      </p>
                     <input
+                      style={{borderColor: isValidNumber ? 'red' : '#333996'}}
                       className="modal__input"
                       type="number"
                       name="Mobile"
                       placeholder="Mobile"
                       id="MobileInput"
                       required
-                      onChange={(e) => setUserInfo({...userInfo, number: e.target.value})}
-                    />
+                      onChange={(e) => numberHandler(e.target.value) }/>
+                     <p style={{display: isValidNumber ? 'block' : 'none'}} className="m-0 name-warning error-text p-0 mb-2">
+                        More than 10 number
+                      </p>
                   </div>
                 </div>
                 <div className="ps-5">
@@ -162,3 +188,5 @@ function Modal() {
 }
 
 export default Modal;
+
+

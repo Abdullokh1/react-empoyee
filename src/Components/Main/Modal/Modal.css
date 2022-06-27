@@ -39,3 +39,13 @@
 .reset-btn{
   background-color: #e0e0e0;
 }
+
+.error-text{
+  font-size: 13px;
+  color: red;
+}
+
+.error-text:not(:last-child){
+  position: relative;
+  top: -12px;
+}

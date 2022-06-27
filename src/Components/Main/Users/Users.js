@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Users.css'
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
@@ -6,17 +6,25 @@ import { removeEmploye } from '../../../store/EmployeeSlice';
 import Modal from '../Modal/Modal'
 import EditModal from '../EditModal/EditModal'
 
-function Users() {
-  let [id, setId] = useState();
+function Users({search, setSearch}) {
+  const newArr = useSelector(state => state.employee);
   const employee  = useSelector((state) => state.employee);
+  let [id, setId] = useState();
   const dispatch = useDispatch();
-
   const removeHandler = (userId) => {
     dispatch(
       removeEmploye({id: userId})
     )
   }
 
+  useEffect(() => {
+    setSearch(newArr);
+  }, [newArr]);
+
+  const searchHandler = (e) => {
+    setSearch(newArr.filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase())));
+  }
+  
   const editHandler = (editId) =>{
     setId(editId)
   }
@@ -27,7 +35,7 @@ function Users() {
         <div className="d-flex justify-content-between align-items-center">
           <div className="cards__input">
             <i className="bx me-2 cards__icon fs-5 bx-search-alt-2" />
-            <input className="cards__search" type="text" name="search-employee" id="SearchInput" />
+            <input onChange={searchHandler} className="cards__search" type="text" name="search" id="SearchInput" />
             <span className="cards__info">Search Employees</span>
           </div>
           <button className="cards__btn d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal" id="addBtn">
@@ -68,7 +76,7 @@ function Users() {
             </tr>
           </thead>
           <tbody>
-            {employee.map(item =>{
+            {search.map(item =>{
               console.log(item.id);
               return (
               <tr key={item.id}>

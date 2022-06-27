@@ -4,7 +4,7 @@ import Left from './Left/Left'
 import './Main.css'
 import Users from './Users/Users'
 
-function Main() {
+function Main({search, setSearch}) {
   return (
     <>
     <div className='d-flex'>
@@ -13,7 +13,7 @@ function Main() {
       <div>
         <Header/>
 
-        <Users/>
+        <Users search={search} setSearch={setSearch}/>
         
       </div>
     </div>
